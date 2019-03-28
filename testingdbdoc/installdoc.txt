@@ -1,0 +1,8 @@
+//testing
+yarn add mocha --dev
+yarn add express
+yarn add body-parser
+yarn add supertest --dev
+yarn add bcrypt
+yarn add mongoose@4.13.7
+yarn add jsonwebtoken

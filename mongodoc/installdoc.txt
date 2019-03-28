@@ -1,0 +1,16 @@
+//mongoose
+yarn add mongoose
+
+//express
+yarn add express
+
+//body-parser
+yarn add body-parser
+
+//reload
+yarn add reload --dev
+
+//thu vien upload file
+yarn add multer
+
+heroku logs

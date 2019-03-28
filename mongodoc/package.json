@@ -1,0 +1,20 @@
+{
+  "name": "mongodoc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js nodemon index.js -e js,ejs,css"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.1",
+    "multer": "^1.4.1"
+  },
+  "devDependencies": {
+    "reload": "^2.4.0"
+  }
+}

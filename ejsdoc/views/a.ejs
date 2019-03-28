@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<% const person={ name: 'teo', age:10} %>
+<% const subjects=['NodeJs', 'Angular 4', 'HTML'] %>
+<% const words=[
+        {en:'one', vn:'mot'},
+        {en:'two', vn:'hai'},
+        {en:'three', vn:'ba'},
+] %>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <h1>Khoa Pham Online</h1>
+    <p>Hello
+        <%= person.name %>
+    </p>
+    <%if(person.age>18){%>
+    <p>Ban du 18 tuoi</p>
+    <%} else{%>
+    <p>Ban chua du 18 tuoi</p>
+    <%}%>
+
+    <%subjects.forEach(s=>{%>
+    <div>
+        <p>
+            <%= s%>
+        </p>
+    </div>
+    <%})%>
+
+    <%words.forEach(w=>{
+        const {en,vn}=w;
+        %>
+    <div>
+        <h1>
+            <%= w.en %>
+        </h1>
+        <p>
+            <%= w.vn %>
+        </p>
+    </div>
+    <%})%>
+
+</body>
+
+</html>
+<script src="reload/reload.js"></script>

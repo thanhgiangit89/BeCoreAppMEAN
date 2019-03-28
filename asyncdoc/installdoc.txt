@@ -1,0 +1,15 @@
+//express
+yarn add express
+
+//template engine
+yarn add ejs
+
+//reload code khong can reload trinh duyet
+yarn add reload --dev
+nodemon index.js nodemon index.js -e js,ejs,css
+
+//post value submit tu form
+yarn add body-parser
+
+//request url
+yarn add request

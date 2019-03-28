@@ -1,0 +1,17 @@
+{
+  "name": "ejsreviewdoc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "server": "nodemon index.js nodemon index.js -e js,ejs,css"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "reload": "^2.4.0"
+  }
+}

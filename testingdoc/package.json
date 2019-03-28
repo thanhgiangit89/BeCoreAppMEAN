@@ -1,0 +1,18 @@
+{
+  "name": "testingdoc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "supertest": "^4.0.2"
+  },
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.19"
+  }
+}
