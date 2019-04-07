@@ -1,64 +1,113 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-// import { Word } from './Word';
-// import { ListWord } from './ListWord';
-// function show() {
-//   alert(123);
-// }
 
-const words = [
+const WORDS = [
   { _id: 'abc1', en: 'One', vn: 'Mot', isMemorized: true },
   { _id: 'abc2', en: 'Two', vn: 'Hai', isMemorized: false },
   { _id: 'abc3', en: 'Three', vn: 'Ba', isMemorized: false },
   { _id: 'abc4', en: 'Four', vn: 'Bon', isMemorized: true },
 ];
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { num: 10 };
-  // }
-  render() {
-    // const word1 = { en: 'One', vn: 'Mot', isMemorized: true };
-    // const word2 = { en: 'Two', vn: 'Hai', isMemorized: false };
-    // const words = ['NodeJs', 'ReactJs', 'Angular'];
-    // return (
-    //   <div className="App">
-    //     <ListWord title="English - Vietnamese" isShowForm={false} />
-    //     <button className="btn btn-success" onClick={show}>
-    //       Show Text
-    //     </button>
-    //     <Word wordInfo={word1} />
-    //     <Word wordInfo={word2} />
-    //     {words.map(w => <p>{w}</p>)}
-    //   </div>
-    // );
+  constructor(props) {
+    super(props);
+    this.state = { words: WORDS, txtEn: '', txtVn: '', shouldShowForm: false }
+  }
+
+  removeWord(_id) {
+    const newWords = this.state.words.filter(w => w._id !== _id);
+    this.setState({ words: newWords })
+  }
+
+  addWord() {
+    const { txtEn, txtVn, words } = this.state;
+    const newWord = { _id: Math.random(), en: txtEn, vn: txtVn, isMemorized: false };
+    const newArray = [newWord].concat(words);
+    this.setState({ words: newArray, txtEn: '', txtVn: '', shouldShowForm: false })
+  }
+
+  toggleMemorized(id) {
+    const newWords = this.state.words.map(word => {
+      if (word._id !== id) return word;
+
+      const { en, vn, _id, isMemorized } = word;
+      return { en, vn, _id, isMemorized: !isMemorized };
+    });
+
+    this.setState({ words: newWords })
+  }
+  toggleShouldShowForm() {
+    const { shouldShowForm } = this.state;
+    this.setState({ shouldShowForm: !shouldShowForm });
+  }
+
+  genList(word) {
+    return (
+      <div className="word" key={word._id}>
+        <div className="word-container">
+          <h3 className="text-success">{word.en}</h3>
+          <h3 className="text-danger">
+            {word.isMemorized ? '----' : word.vn}
+          </h3>
+        </div>
+        <div className="btn-container">
+          <button className="btn btn-success" onClick={() => this.toggleMemorized(word._id)} >
+            {word.isMemorized ? 'Forgot' : 'Memorized'}
+          </button>
+          <button className="btn btn-warning" onClick={() => this.removeWord(word._id)}>
+            Remove
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  getForm() {
+    if (!this.state.shouldShowForm) return (
+      <button
+        className="btn btn-success"
+        onClick={() => this.toggleShouldShowForm()}
+      >
+        Add Word
+      </button>);
 
     return (
-      // <div className="container">
-      //   <h3>Value: {this.state.num}</h3>
-      //   <button className="btn btn-success"
-      //     onClick={() => this.setState({ num: this.state.num + 1 })}>
-      //     Increase
-      //   </button>
-      //   <button className="btn btn-warning"
-      //     onClick={() => this.setState({ num: this.state.num - 1 })}>
-      //     Descrease
-      //   </button>
-      // </div>
-      <div className="App container">
-        <div>
-          <div className="word">
-            <div className="word-container">
-              <h3 className="text-success">One</h3>
-              <h3 className="text-danger">mot</h3>
-            </div>
-            <div className="btn-container">
-              <button className="btn btn-success">Forgot</button>
-              <button className="btn btn-warning">Remove</button>
-            </div>
-          </div>
+      <div className="form-group" style={{ width: '200px' }}>
+        <input
+          placeholder="English"
+          className="form-control"
+          onChange={evt => this.setState({ txtEn: evt.target.value })}
+        />
+        <br />
+        <input
+          placeholder="Vietnamese"
+          className="form-control"
+          onChange={evt => this.setState({ txtVn: evt.target.value })}
+        />
+        <br />
+        <div className="btn-container">
+          <button
+            className="btn btn-success"
+            onClick={() => this.addWord()}>
+            Add word
+            </button>
+
+          <button
+            className="btn btn-danger"
+            onClick={() => this.toggleShouldShowForm()}>
+            Cancel
+            </button>
         </div>
+
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <div className="App container">
+        {this.getForm()}
+        {this.state.words.map(word => this.genList(word))}
       </div>
     );
   }
