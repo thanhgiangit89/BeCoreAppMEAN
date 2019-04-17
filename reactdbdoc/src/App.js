@@ -13,9 +13,9 @@ const WORDS = [
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { words: WORDS, txtEn: '', txtVn: '', shouldShowForm: true }
-    this.addWord = this.addWord.bind(this);
-    this.toggleShouldShowForm = this.toggleShouldShowForm.bind(this);
+    this.state = { words: WORDS, shouldShowForm: false }
+    this.onAddWord = this.onAddWord.bind(this);
+    this.onToggleShouldShowForm = this.onToggleShouldShowForm.bind(this);
   }
 
   removeWord(_id) {
@@ -23,11 +23,11 @@ class App extends Component {
     this.setState({ words: newWords })
   }
 
-  addWord() {
-    const { txtEn, txtVn, words } = this.state;
+  onAddWord(txtEn, txtVn) {
+    const { words } = this.state;
     const newWord = { _id: Math.random(), en: txtEn, vn: txtVn, isMemorized: false };
     const newArray = [newWord].concat(words);
-    this.setState({ words: newArray, txtEn: '', txtVn: '', shouldShowForm: false })
+    this.setState({ words: newArray, shouldShowForm: false })
   }
 
   toggleMemorized(id) {
@@ -40,7 +40,7 @@ class App extends Component {
 
     this.setState({ words: newWords })
   }
-  toggleShouldShowForm() {
+  onToggleShouldShowForm() {
     const { shouldShowForm } = this.state;
     this.setState({ shouldShowForm: !shouldShowForm });
   }
@@ -70,7 +70,11 @@ class App extends Component {
   render() {
     return (
       <div className="App container">
-        <WordForm shouldShowForm={this.state.shouldShowForm}/>
+        <WordForm
+          shouldShowForm={this.state.shouldShowForm}
+          onToggleShouldShowForm={this.onToggleShouldShowForm}
+          onAddWord={this.onAddWord}
+        />
         {this.state.words.map(word => this.genList(word))}
       </div>
     );

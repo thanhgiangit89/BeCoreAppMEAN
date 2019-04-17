@@ -8,7 +8,7 @@ export class WordForm extends Component {
 
     render() {
         if (!this.props.shouldShowForm) return (
-            <button className="btn btn-success" >
+            <button className="btn btn-success" onClick={this.props.onToggleShouldShowForm}>
                 Add Word
             </button >
         );
@@ -28,10 +28,10 @@ export class WordForm extends Component {
                 />
                 <br />
                 <div className="btn-container">
-                    <button className="btn btn-success">
+                    <button className="btn btn-success" onClick={() => this.props.onAddWord(this.state.txtEn, this.state.txtVn)}>
                         Add word
                       </button>
-                    <button className="btn btn-danger">
+                    <button className="btn btn-danger" onClick={this.props.onToggleShouldShowForm}>
                         Cancel
                       </button>
                 </div>
