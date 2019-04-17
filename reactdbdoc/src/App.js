@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import { Parent } from './Parent';
 import './App.css';
 
 const WORDS = [
@@ -72,7 +73,6 @@ class App extends Component {
       >
         Add Word
       </button>);
-
     return (
       <div className="form-group" style={{ width: '200px' }}>
         <input
@@ -92,26 +92,29 @@ class App extends Component {
             className="btn btn-success"
             onClick={this.addWord}>
             Add word
-            </button>
+                </button>
 
           <button
             className="btn btn-danger"
             onClick={this.toggleShouldShowForm}>
             Cancel
-            </button>
+                </button>
         </div>
 
       </div>
     )
   }
 
+
   render() {
-    return (
-      <div className="App container">
-        {this.getForm()}
-        {this.state.words.map(word => this.genList(word))}
-      </div>
-    );
+    // return (
+    //   <div className="App container">
+    //     {this.getForm()}
+    //     {this.state.words.map(word => this.genList(word))}
+    //   </div>
+    // );
+
+    return <Parent />;
   }
 }
 
