@@ -5,21 +5,21 @@ export class Parent extends Component {
     constructor(props) {
         super(props);
         this.state = { count: 1 };
-        this.increase = this.increase.bind(this);
-        this.descrease = this.descrease.bind(this);
-        this.reset = this.reset.bind(this);
+        this.onIncrease = this.onIncrease.bind(this);
+        this.onDescrease = this.onDescrease.bind(this);
+        this.onReset = this.onReset.bind(this);
     }
-    increase() {
+    onIncrease() {
         const { count } = this.state;
         this.setState({ count: count + 1 });
     }
 
-    descrease() {
+    onDescrease() {
         const { count } = this.state;
         this.setState({ count: count - 1 });
     }
 
-    reset() {
+    onReset() {
         this.setState({ count: 0 });
     }
 
@@ -28,7 +28,11 @@ export class Parent extends Component {
             <div>
                 <h3>Count: {this.state.count}</h3>
                 <br />
-                <Child />
+                <Child
+                    onIncrease={this.onIncrease}
+                    onDescrease={this.onDescrease}
+                    onReset={this.onReset}
+                />
             </div>
         )
     }
