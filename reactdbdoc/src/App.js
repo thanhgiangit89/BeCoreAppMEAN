@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-import { Parent } from './Parent';
+// import { Parent } from './Parent';
 import { Word } from './Word';
 import { WordForm } from './WordForm';
+import { WordFilter } from './WordFilter';
 import './App.css';
 
 const WORDS = [
@@ -14,12 +14,14 @@ const WORDS = [
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { words: WORDS, shouldShowForm: false }
+    this.state = { words: WORDS, shouldShowForm: false, filterStatus: 'SHOW_MEMORIZED' }
     this.onAddWord = this.onAddWord.bind(this);
     this.onToggleShouldShowForm = this.onToggleShouldShowForm.bind(this);
+    this.onToggleMemorized = this.onToggleMemorized.bind(this);
+    this.onRemoveWord = this.onRemoveWord.bind(this);
   }
 
-  removeWord(_id) {
+  onRemoveWord(_id) {
     const newWords = this.state.words.filter(w => w._id !== _id);
     this.setState({ words: newWords })
   }
@@ -31,7 +33,7 @@ class App extends Component {
     this.setState({ words: newArray, shouldShowForm: false })
   }
 
-  toggleMemorized(id) {
+  onToggleMemorized(id) {
     const newWords = this.state.words.map(word => {
       if (word._id !== id) return word;
 
@@ -55,7 +57,15 @@ class App extends Component {
           onToggleShouldShowForm={this.onToggleShouldShowForm}
           onAddWord={this.onAddWord}
         />
-        {this.state.words.map(word => <Word wordInfo={word} />)}
+        <WordFilter />
+        {this.state.words.map(word => (
+          <Word
+            filterStatus={this.state.filterStatus}
+            wordInfo={word}
+            onRemoveWord={this.onRemoveWord}
+            onToggleMemorized={this.onToggleMemorized}
+          />))
+        }
       </div>
     );
 
