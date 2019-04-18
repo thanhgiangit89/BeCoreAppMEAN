@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Child = (props) => (
+export const Child = ({ onIncrease, onDescrease, onReset }) => (
     <div>
-        <button className="btn btn-success" onClick={props.onIncrease}>Increase</button>
-        <button className="btn btn-warning" onClick={props.onDescrease}>Descrease</button>
-        <button className="btn btn-danger" onClick={props.onReset}>Reset</button>
+        <button className="btn btn-success" onClick={onIncrease}>Increase</button>
+        <button className="btn btn-warning" onClick={onDescrease}>Descrease</button>
+        <button className="btn btn-danger" onClick={onReset}>Reset</button>
     </div>
 );

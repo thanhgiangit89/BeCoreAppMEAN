@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-// import { Parent } from './Parent';
-import { WordForm } from './wordForm';
+import { Parent } from './Parent';
+import { Word } from './Word';
+import { WordForm } from './WordForm';
 import './App.css';
 
 const WORDS = [
@@ -45,27 +46,6 @@ class App extends Component {
     this.setState({ shouldShowForm: !shouldShowForm });
   }
 
-  genList(word) {
-    return (
-      <div className="word" key={word._id}>
-        <div className="word-container">
-          <h3 className="text-success">{word.en}</h3>
-          <h3 className="text-danger">
-            {word.isMemorized ? '----' : word.vn}
-          </h3>
-        </div>
-        <div className="btn-container">
-          <button className="btn btn-success" onClick={() => this.toggleMemorized(word._id)} >
-            {word.isMemorized ? 'Forgot' : 'Memorized'}
-          </button>
-          <button className="btn btn-warning" onClick={() => this.removeWord(word._id)}>
-            Remove
-          </button>
-        </div>
-      </div>
-    );
-  }
-
 
   render() {
     return (
@@ -75,7 +55,7 @@ class App extends Component {
           onToggleShouldShowForm={this.onToggleShouldShowForm}
           onAddWord={this.onAddWord}
         />
-        {this.state.words.map(word => this.genList(word))}
+        {this.state.words.map(word => <Word wordInfo={word} />)}
       </div>
     );
 
