@@ -10,6 +10,11 @@ const defaulState = {
     ]
 }
 function reducer(state = defaulState, action) {
+    if(action.type='SET_FILTER_STATUS') return {
+        shouldShowForm:state.shouldShowForm,
+        words:state.words,
+        filterStatus:action.filterStatus
+    }
     return state;
 }
 

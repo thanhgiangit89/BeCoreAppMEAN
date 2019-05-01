@@ -1,14 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-
-export const WordFilter = ({ filterStatus, onChangeFilterStatus }) => (
+const WordFilterComponent = ({ filterStatus, dispatch }) => (
     <div>
         <br />
         <select
             className="form-control"
             style={{ width: '200px' }}
             value={filterStatus}
-            onChange={evt => onChangeFilterStatus(evt.target.value)}
+            onChange={evt => dispatch({ type: 'SET_FILTER_STATUS', filterStatus: evt.target.value })}
         >
             <option value="SHOW_ALL">SHOW ALL</option>
             <option value="SHOW_FORGOT">SHOW FORGOT</option>
@@ -16,3 +16,6 @@ export const WordFilter = ({ filterStatus, onChangeFilterStatus }) => (
         </select>
     </div>
 )
+const mapStates = state => ({ filterStatus: state.filterStatus });
+
+export const WordFilter = connect(mapStates)(WordFilterComponent);
